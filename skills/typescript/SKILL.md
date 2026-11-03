@@ -15,7 +15,7 @@ Examples for every rule: `references/patterns.md`. React and Next.js: `reference
 |---|---|
 | Discriminated unions | Model variants with a `kind` literal so impossible states can't be represented. No optional-field bags. Pick one discriminant name per repo and stick to it. |
 | Branded types | `string & { readonly __brand: "OrgId" }` for IDs that get mixed up. A brand comes from a verifying type guard (`input is OrgId`), never from `as`. |
-| Constructive modeling | `[T, ...T[]]` for non-empty, `[T, T][]` for pairs, start plus duration for a range. |
+| Constructive modeling | `[T, ...T[]]` for non-empty, `[T, T][]` for pairs. A range constructor validates its start and finite, nonnegative duration. |
 | Simplest total type | Keep `T[]` while every operation on it stays total. Strengthen to `NonEmpty<T>` only where the loose type forces `!`, a cast, or a "should never happen" throw. |
 | `unknown` over `any` | External data is `unknown` until parsed. |
 | Schemas before guards | Use the repo's schema library (zod) and infer types from it (`z.infer`). Use `safeParse` when failure is an expected branch. Don't add a new schema dependency for one guard. |

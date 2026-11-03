@@ -19,7 +19,7 @@ Before forming a theory, read what the system already recorded: logs, DB rows, q
 
 Reproduce it yourself, on the same surface: the same endpoint, page, CLI command, or job. Ask the user to reproduce only when there is a specific, stated reason you can't reach that surface.
 
-If it won't fire, synthesize the trigger, tighten the conditions, or add instrumentation until it does. When a cheap local test path exists, commit the failing repro before the fix.
+If it won't fire, synthesize the trigger, tighten the conditions, or add instrumentation until it does. When a cheap local test path exists, write and run the failing repro before the fix. Include the regression test and fix together in a landable commit.
 
 ## 3. Narrow by runtime evidence
 

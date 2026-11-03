@@ -40,13 +40,13 @@ Report a conflict to the PR's owner. Don't fall through to CI to look busy. Ment
 
 ## 3. Classify CI before any retrigger
 
-- **Failure in code the diff touched:** a real bug. Fix it locally (`preflight`), then push once.
-- **Failure in code the diff never touched:** probably a stale base. Check `git merge-base --is-ancestor origin/main <head>`. Report that a rebase is needed instead of burning retries.
+- **Failure introduced by the patch:** fix it locally (`preflight`), then push once. The failing code may be untouched; changed callers, dependencies, or configuration can break it.
+- **Cause unclear or failure also present on the base:** compare the same check on the base and changed branch under the same conditions. Check ancestry with `git merge-base --is-ancestor origin/main <head>`, but recommend a rebase only when evidence connects the failure to the stale base.
 - **Flake or infrastructure:** one fresh run (`gh run rerun <id>`), once. An identical second failure means it was never a flake. Read the job logs (`gh run view <id> --log-failed`).
 
 ## 4. Before merging: is the verdict still current?
 
-- A review verdict covers one patch. After a rebase, compare `git diff <base>...<sha> | git patch-id --stable` at the reviewed SHA and at the head. Same patch-id: the verdict holds. Different: re-review the delta (`review`, re-review mode).
+- A review verdict covers the patch and the base it was checked against. After a rebase, compare `git diff <base>...<sha> | git patch-id --stable` using each revision's own base. An unchanged patch-id preserves findings about the patch, but inspect base changes to callers, dependencies, configuration, and contracts and rerun affected checks before carrying the verdict forward. If the patch changed, re-review the delta (`review`, re-review mode).
 - Decide whether to rebase only now, at merge time. Fetch trunk and check whether it can affect the patch:
   - Conflict, a file changed on both sides, or a change to which checks run: rebase, then wait for CI.
   - Lockfile changed on both sides: no rebase, if a frozen install passes on the merge result.
@@ -58,7 +58,7 @@ Report a conflict to the PR's owner. Don't fall through to CI to look busy. Ment
 
 - Stacks land bottom-up, one PR at a time: `gh pr merge <n> --squash`. A PR whose base is still its parent's branch merges into that branch, not into main.
 - Read the result back: `gh pr view <n> --json state,mergedAt,baseRefName`. A queued or auto-merge request is not a merge. A PR has landed only when it reads merged with main as its base.
-- After each merge, retarget the child to main and rebase its patch (`git rebase --onto origin/main <old-parent-tip>`), then `git push --force-with-lease`. The patch-id decides whether its verdict survives.
+- After each merge, retarget the child to main and rebase its patch (`git rebase --onto origin/main <old-parent-tip>`), then `git push --force-with-lease`. Check both the patch-id and relevant base changes before carrying its verdict forward.
 - If a merge stalls, find out why before changing anything.
 
 ## 6. Confirm it shipped

@@ -38,7 +38,7 @@ Before committing, run the `cleanup` pass on the diff: narrating comments, unsup
 
 ## 4. Shape the commits
 
-- Commit freely while working. Before opening the PR, rebase into small, ordered commits. Each commit lands on its own, and the sequence reads as an argument (failing test first, then the fix).
+- Commit freely while working. Before opening the PR, rebase into small, ordered commits that each pass their relevant checks. Run the regression test against the old code first, then include the test and fix together in a landable commit.
 - Titles: `type(scope): subject`. Imperative, no trailing period, naming a real symbol when one carries the change.
 - Commit bodies don't restate the subject.
 - Stage named files only. Never `git add -A` in a tree with scratch files.
@@ -66,7 +66,7 @@ Add screenshots or video only when they prove a claim.
 
 - Batch every known fix into one push wave, so checks restart once.
 - Don't rebase on every trunk move, because each rebase restarts CI. Rebase only to prepare a merge, on a real conflict (`git merge-tree --write-tree origin/main HEAD`), or when a CI failure is caused by trunk.
-- A CI failure in code the diff never touched means a stale base, not your bug. Check with `git merge-base --is-ancestor origin/main HEAD`.
+- A CI failure in untouched code can come from changed callers, dependencies, configuration, or a stale base. Compare the failing check on the base and changed branch under the same conditions before assigning cause. `git merge-base --is-ancestor origin/main HEAD` checks ancestry, not causality.
 
 ## Reply
 
