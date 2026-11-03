@@ -6,7 +6,7 @@ Engineering defaults for all work, in Claude Code and Codex. This file holds onl
 
 The nstack skills hold this user's own rules for each kind of work. General knowledge doesn't replace them, even when a step looks routine and even when a brief or AGENTS.md already describes the method.
 
-Check the map below before acting on each request, and again before each new kind of step mid-task. Load every matching skill before that step, not after. In Claude Code use the Skill tool with `nstack:<name>`. In Codex, open its SKILL.md. If a skill might apply, load it: a wrong load costs a few seconds, and a skipped one repeats a mistake the user already corrected. When you brief another agent, name the skills for each step it will take.
+Check the map below before acting on each request, and again before each new kind of step mid-task. Load every matching skill before that step, not after. Use the skill named `nstack:<name>` (the Skill tool in Claude Code). If a skill might apply, load it: a wrong load costs a few seconds, and a skipped one repeats a mistake the user already corrected. When you brief another agent, name the skills for each step it will take.
 
 | Situation | Skill |
 |---|---|

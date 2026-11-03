@@ -4,9 +4,11 @@ Engineering skills for Claude Code and Codex. Small, evidence-first, and grown f
 
 ## How it works
 
-- **`core.md`** is always loaded: a situation → skill map that tells agents which skill to load before each kind of step, plus defaults for start, build, prove, debug, autonomy, and reply. Claude Code gets it from the plugin's SessionStart hook. Codex gets it from a marked block in `~/.codex/AGENTS.md`.
-- **Skills** load on demand: from the map in `core.md`, from their `description`, or by name (`/nstack:review`). There's no mode to switch on.
-- **`coordinate`** is the entry point for big work spread across parallel sessions.
+nstack is one plugin that works in both Claude Code and Codex:
+
+- **`core.md`** is injected at the start of every session: a situation → skill map plus defaults for start, build, prove, debug, autonomy, and reply.
+- **Skills** load on demand: from the map, from their `description`, or by name (`/nstack:review`).
+- **File-type rules** in `rules/` fire once per session when the agent reads or edits a matching file (`.ts`, `.py`, SQL and migrations, tests) and tell it to load the matching skill.
 
 ## Skills
 
@@ -37,21 +39,23 @@ Engineering skills for Claude Code and Codex. Small, evidence-first, and grown f
 
 ## Install
 
-Claude Code (skills and core.md):
+**Claude Code**, once:
 
 ```
 /plugin marketplace add nelsongallardo/nstack
 /plugin install nstack@nstack
 ```
 
-Then turn on auto-update for the `nstack` marketplace in `/plugin` → Marketplaces.
+Then in `/plugin` → Marketplaces → nstack, turn on auto-update. Updates arrive on their own.
 
-Then, for both tools, clone and run the installer. It copies the path rules into `~/.claude/rules/` (they load the language skills whenever Claude touches a matching file), links the skills into Codex, writes `core.md` into `~/.codex/AGENTS.md`, and enables this repo's pre-commit check. Re-run it after every `git pull`.
+**Codex**, once:
 
 ```
-git clone git@github.com:nelsongallardo/nstack.git ~/projects/nstack
-~/projects/nstack/install.sh            # --dry-run to preview
+codex plugin marketplace add nelsongallardo/nstack
+codex plugin add nstack@nstack
 ```
+
+The next time you open Codex it says a hook needs review: approve the nstack hooks once. To update later: `codex plugin marketplace upgrade nstack`.
 
 ## Adding to it
 
