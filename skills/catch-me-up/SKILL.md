@@ -1,6 +1,6 @@
 ---
 name: catch-me-up
-description: Catch the user up on what changed and list everything waiting on them, so they can decide from the reply alone. Also restates a message in plain words, or reconstructs recent work across sessions. Use for "catch me up", "what's left", "what do I need to answer", "repeat the questions", "where are we", "recall my work on X", "say that simpler", or "in your own words".
+description: "The user's own format for catching them up: what changed, and every decision waiting on them, answerable from the reply alone. Load for 'what's left', 'what needs me', 'what do I need to answer', 'repeat the questions', 'catch me up', 'where are we', 'status', 'recall my work on X', or 'say that simpler'."
 ---
 
 # Catch me up

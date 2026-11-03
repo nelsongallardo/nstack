@@ -1,6 +1,6 @@
 ---
 name: verify-ui
-description: Prove a web change works by driving the real app the way a user does, with playwright-cli, and capture evidence. Also generates and maintains a per-repo verify-<app> skill (launch, doctor, drive, evidence, cleanup, plus a feature map). Use to verify a UI change, reproduce a frontend bug, "check it in the browser", "show me it works", or "make a verification skill for this repo".
+description: "The user's own procedure for proving web changes in the real app with playwright-cli, and for generating a per-repo verify-<app> skill. Load before claiming a UI change works, to reproduce a frontend bug, or for 'check it in the browser' and 'show me it works'."
 ---
 
 # Verify UI

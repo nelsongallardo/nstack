@@ -1,6 +1,6 @@
 ---
 name: investigate
-description: Answer "how does X work", "where should this live", "why is it built this way", "why this number", "when did this break", or "are we sure" with a cited, evidence-labeled explanation and no code changes. Use before changing unfamiliar code, for regressions and postmortems, for design rationale, and for "explain this to me" or "help me understand".
+description: "The user's own procedure for how/why questions: code anchors, evidence categories, labeled claims, no code changes. Load for 'how does X work', 'why is it built this way', 'why this number', 'when did this break', 'are we sure', or before changing unfamiliar code."
 ---
 
 # Investigate

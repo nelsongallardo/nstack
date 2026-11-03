@@ -1,6 +1,6 @@
 ---
 name: preflight
-description: Verify a change locally the way CI will before pushing, then shape commits and open the PR. Use before any git push, "open a PR", "push this", "is this ready", or after CI failed and you are about to push a fix. CI costs money, so it is never the place to find out.
+description: "The user's own pre-push procedure: run what CI runs locally (CI costs money), prove the change, shape commits, write the PR body. Load before every git push, before opening a PR, after CI fails, and for 'is this ready'."
 ---
 
 # Preflight

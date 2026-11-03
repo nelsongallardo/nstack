@@ -1,6 +1,36 @@
 # nstack core
 
-Engineering defaults for all work, in Claude Code and Codex. Detail lives in the nstack skills. This file holds only the rules that apply everywhere. A repo's own AGENTS.md or CLAUDE.md wins where it disagrees.
+Engineering defaults for all work, in Claude Code and Codex. This file holds only the rules that apply everywhere. A repo's own AGENTS.md or CLAUDE.md wins where it disagrees.
+
+## Load the skill before the step
+
+The nstack skills hold this user's own rules for each kind of work. General knowledge doesn't replace them, even when a step looks routine and even when a brief or AGENTS.md already describes the method.
+
+Check the map below before acting on each request, and again before each new kind of step mid-task. Load every matching skill before that step, not after. In Claude Code use the Skill tool with `nstack:<name>`. In Codex, open its SKILL.md. If a skill might apply, load it: a wrong load costs a few seconds, and a skipped one repeats a mistake the user already corrected. When you brief another agent, name the skills for each step it will take.
+
+| Situation | Skill |
+|---|---|
+| Writing or editing `.ts` / `.tsx` | `typescript`, plus `types-and-boundaries` for new types, parsers, or API/DB boundaries |
+| Writing or editing `.py` | `python` |
+| A migration, SQL, RLS policy, grant, or Supabase auth | `supabase` |
+| Writing, changing, or deciding on tests | `tests` |
+| A bug, error, failing test, "still broken" | `debug` |
+| Slowness, or any perf number | `perf` |
+| A new module or API, or a change with several possible shapes | `design` |
+| A restructure that keeps behavior | `refactor` |
+| About to commit | `cleanup` |
+| About to push or open a PR | `preflight` |
+| Writing a PR, issue, commit message, or doc | `writing` |
+| Reviewing code | `review` |
+| Responding to review comments | `address-review` |
+| PR status, CI, merging, release, "is it deployed" | `land` |
+| Several agents or sessions, "start/open sessions", delegating | `coordinate` |
+| Issue checklists, "what can we unblock" | `issues` |
+| "What's left", "what needs me", "catch me up", "where are we" | `catch-me-up` |
+| How or why questions about code | `investigate` |
+| Recording decisions, assumptions, open questions | `decision-log` |
+| Checking a UI change in the browser | `verify-ui` |
+| A repeated correction, "learn from this" | `learn` |
 
 ## Start
 

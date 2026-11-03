@@ -1,6 +1,6 @@
 ---
 name: learn
-description: Turn a repeated mistake or correction into something that prevents it next time. Prefer structure (architecture, types, lint, test) over prose, and edit nstack itself or the repo's rules. Use for "reflect", "learn from this", "remember this for the future", "make sure this doesn't happen again", "you keep doing X", or after the user corrects the same thing twice.
+description: "The user's own procedure for turning repeated mistakes into structure (types, lint, tests) and skill edits. Load for 'reflect', 'learn from this', 'remember this', 'don't do this again', 'you keep doing X', or after the user corrects the same thing twice."
 ---
 
 # Learn
@@ -46,6 +46,6 @@ Each candidate must pass all of these:
 - A **Rejected** list with a reason each (one-off, already covered, not durable).
 - A **Backlog** of structural fixes too big for now, filed as GitHub issues.
 
-Wait for the user's approval, row by row. Apply trivial edits directly. For an nstack skill change over ~10 lines, open a PR to the nstack repo with the evidence (the session or PR where the mistake happened twice), and keep each skill under 150 lines.
+Wait for the user's approval, row by row. Apply trivial edits directly. For an nstack skill change over ~10 lines, open a PR to the nstack repo with the evidence (the session or PR where the mistake happened twice), and keep each skill under 150 lines. A new skill follows the checklist in the nstack repo's AGENTS.md (core map row, description, eval case, path rule), or it will never be invoked.
 
 When a rule's mistake can no longer happen, delete the rule.

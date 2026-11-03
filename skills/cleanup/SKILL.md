@@ -1,6 +1,6 @@
 ---
 name: cleanup
-description: Strip slop from a diff before it is committed or reviewed, such as narrating comments, unsupported guards, dead compatibility paths, debug logs, lint suppressions, and unrelated edits. Use before committing, before opening a PR, on "clean this up before review", "remove the comments", or "deslop".
+description: "The user's own pre-commit cleanup pass: comments, suppressions, impossible-state guards, dead paths, debug logs, unrelated edits. Load before every commit and before opening or updating a PR, and for 'clean this up' or 'deslop'."
 ---
 
 # Cleanup

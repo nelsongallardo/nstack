@@ -10,8 +10,8 @@ These rules keep nstack small.
    - how to work → an nstack skill;
    - true everywhere → `core.md`.
 4. **Edit before adding.** Extend the skill that should have caught the mistake. If its guidance was there and ignored, fix the `description` or the placement, not the content.
-5. **Size limits.** `SKILL.md` stays under 150 lines, with detail in `references/`. `core.md` stays under ~50 lines.
-6. **Descriptions decide triggering.** Name the situations and the phrases a user would actually say.
+5. **Size limits.** `SKILL.md` stays under 150 lines, with detail in `references/`. `core.md` stays under ~80 lines.
+6. **Descriptions decide triggering.** Open with "The user's own rules for …" so an agent sees the skill holds something it doesn't already know. Then name the situations and the phrases a user would actually say. Every skill also needs a row in the situation map in `core.md`: agents load skills reliably only when the always-on text names them.
 7. **Delete rules whose mistake can no longer happen.**
 8. **Keep it project-agnostic.** Nothing in nstack names a specific project, company, person, PR, or private repo. When a lesson comes from a project, write the general rule ("reset client stores when the user changes"), not the story. Tool and framework names (Next.js, Supabase, Codex) are fine.
 
@@ -24,4 +24,6 @@ skills/<name>/
   scripts/          # optional helpers, executable
 ```
 
-Bump `version` in `.claude-plugin/plugin.json` when a change should reach installed copies.
+Adding a skill has a fixed checklist in [AGENTS.md](AGENTS.md): core map row, directive description, eval case, path rule for file-type skills. `scripts/check.py` enforces it and runs as a pre-commit hook.
+
+Bump `version` in `.claude-plugin/plugin.json` and `marketplace.json` when a change should reach installed copies.

@@ -1,6 +1,6 @@
 ---
 name: writing
-description: Write technical prose people act on, such as READMEs, docs, runbooks, ADRs, PR descriptions, commit messages, issue bodies, and agent-facing instructions (skills, AGENTS.md). Use when writing or reviewing any of those. For general prose style, pair it with the humanizer skill.
+description: "The user's own rules for technical text: docs, READMEs, ADRs, PR titles and bodies, commit messages, issue bodies and comments, and agent instructions. Load before writing or editing any of these."
 ---
 
 # Writing

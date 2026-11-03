@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Blocks commits that add or change a skill without wiring it up.
+exec python3 -I "$(git rev-parse --show-toplevel)/scripts/check.py"

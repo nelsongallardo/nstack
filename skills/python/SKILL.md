@@ -1,6 +1,6 @@
 ---
 name: python
-description: Python rules for backend services, scripts, bots, and data jobs. Covers typing, pydantic at boundaries, uv and pyproject, pytest, async, and logging. Use when writing, editing, or reviewing any .py file or pyproject.toml.
+description: "The user's own Python rules (typing, pydantic at boundaries, uv, pytest, async, logging). Load before writing, editing, or reviewing any .py file or pyproject.toml."
 ---
 
 # Python

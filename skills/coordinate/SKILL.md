@@ -1,6 +1,6 @@
 ---
 name: coordinate
-description: Run work that spans several agents or sessions, using Claude Code subagents, parallel terminal sessions, or Codex runs. Covers splitting the work, writing briefs, worktrees, the build → review → fix → re-review loop, retries, and merge order. Use for "do this in parallel", "open N sessions", "finish the epic", "/coordinate", "orchestrate", "run it overnight", picking up another session's work, or pausing safely.
+description: "The user's own procedure for multi-agent work: splitting work, briefs that name skills, worktrees, the build-review-fix loop, retries, pickup, pause. Load whenever work involves more than one agent or session: 'open/start N sessions', 'in parallel', 'delegate', 'finish the epic', briefing a subagent, or picking up another session's work."
 ---
 
 # Coordinate
@@ -33,11 +33,14 @@ Scope: <what this worker does; what it must not touch>
 Branch/worktree: <name, based on <sha>>
 May write: <paths> | Must not: push to main, merge, comment on GitHub, run prod migrations
 Data shape: <the types / state machine / table this change is built around>
+Skills: <the nstack skills to load, per step: e.g. typescript + supabase + tests while building, cleanup before commit, preflight before push, writing for the PR body>
 Context: <upstream reports, pasted in full, not linked>
 Report to: <path>, containing: head SHA, what was built, verification run + output, deferred items, anything the coordinator must know. Reply with only the path.
 ```
 
 If you can't name the evidence for "done", the unit isn't scoped yet.
+
+Always fill in the Skills line. A worker that receives a detailed brief treats it as complete and won't look for skills on its own.
 
 ## 3. Isolation
 

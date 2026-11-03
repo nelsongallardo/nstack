@@ -1,6 +1,6 @@
 ---
 name: land
-description: Drive open PRs to merge-ready, merge them when asked, and confirm the result actually shipped (CI, deploy, migrations, issue checklists). Use for "check on PR X", "get it green", "babysit", "merge it", "land the stack", "watch the merge", "is it deployed", or "check everything is ok after merging".
+description: "The user's own procedure for PR status, CI failures, merging, release, and confirming deploy and migrations shipped. Load for 'check on PR X', 'get it green', 'merge', 'land', 'watch the release', 'is it deployed', or after any merge."
 ---
 
 # Land

@@ -4,8 +4,8 @@ Engineering skills for Claude Code and Codex. Small, evidence-first, and grown f
 
 ## How it works
 
-- **`core.md`** is always loaded: about 40 lines of defaults (start, build, prove, debug, autonomy, reply). Claude Code gets it from the plugin's SessionStart hook. Codex gets it from a marked block in `~/.codex/AGENTS.md`.
-- **Skills** load on demand. Each one triggers from its `description` when the task matches, or by name (`/review`). There's no mode to switch on.
+- **`core.md`** is always loaded: a situation → skill map that tells agents which skill to load before each kind of step, plus defaults for start, build, prove, debug, autonomy, and reply. Claude Code gets it from the plugin's SessionStart hook. Codex gets it from a marked block in `~/.codex/AGENTS.md`.
+- **Skills** load on demand: from the map in `core.md`, from their `description`, or by name (`/nstack:review`). There's no mode to switch on.
 - **`coordinate`** is the entry point for big work spread across parallel sessions.
 
 ## Skills
@@ -37,7 +37,7 @@ Engineering skills for Claude Code and Codex. Small, evidence-first, and grown f
 
 ## Install
 
-Claude Code:
+Claude Code (skills and core.md):
 
 ```
 /plugin marketplace add nelsongallardo/nstack
@@ -46,7 +46,7 @@ Claude Code:
 
 Then turn on auto-update for the `nstack` marketplace in `/plugin` → Marketplaces.
 
-Codex (and re-run after `git pull`):
+Then, for both tools, clone and run the installer. It copies the path rules into `~/.claude/rules/` (they load the language skills whenever Claude touches a matching file), links the skills into Codex, writes `core.md` into `~/.codex/AGENTS.md`, and enables this repo's pre-commit check. Re-run it after every `git pull`.
 
 ```
 git clone git@github.com:nelsongallardo/nstack.git ~/projects/nstack

@@ -1,6 +1,6 @@
 ---
 name: typescript
-description: TypeScript rules for backend and frontend code (Node, NestJS, Next.js, React). Covers types, narrowing, schemas, and React/Next server-client boundaries. Use when writing, editing, or reviewing any .ts or .tsx file.
+description: "The user's own TypeScript rules (types, narrowing, zod schemas, errors, React/Next server-client boundaries, NestJS). Load before writing, editing, or reviewing any .ts or .tsx file, including small edits and edits made through scripts."
 ---
 
 # TypeScript

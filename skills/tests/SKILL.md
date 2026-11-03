@@ -1,6 +1,6 @@
 ---
 name: tests
-description: Decide whether a test is worth writing, then write or review it so it tests behavior rather than implementation. Use when writing, changing, or reviewing tests, when asked for TDD or a regression test, when a bug fix might need a test, or when deciding whether a change needs tests at all.
+description: "The user's own rules for tests: whether a test is worth writing, behavior over implementation, the two imagined edits, mocks, TDD. Load before writing, changing, or reviewing any test, before 'red-first' or regression tests, and when deciding whether a change needs tests."
 ---
 
 # Tests

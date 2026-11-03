@@ -1,6 +1,6 @@
 ---
 name: types-and-boundaries
-description: Language-neutral rules for types, validation, and data modeling. Make illegal states unrepresentable, parse at system boundaries, brand IDs that get mixed up, model the domain as data, and keep operations idempotent. Use when designing types, a data model, an API or DB boundary, a state machine, a worker or webhook handler, or reviewing a function signature. The typescript and python skills add syntax.
+description: "The user's own rules for types and data modeling: parse at boundaries, identity from the session, branded IDs, unions and state machines, idempotent operations, concurrency. Load when adding or changing types, parsers, API or DB boundaries, workers, webhooks, or state logic."
 ---
 
 # Types and boundaries

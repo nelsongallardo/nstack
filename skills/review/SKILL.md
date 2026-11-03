@@ -1,6 +1,6 @@
 ---
 name: review
-description: Review a PR, branch, or diff for real defects only, meaning bugs, regressions, data loss, and security holes, each tied to a concrete failure scenario and backed by evidence. Also re-reviews a new head SHA against a prior report. Use for "review this PR", "code review", "review #123", "re-check the new head", or reviewing another session's work. Not for style, naming, or design taste.
+description: "The user's own review procedure: real defects only, each with a failure scenario and evidence, an optional Codex second opinion, re-review on a new head. Load for 'review', 'code review', 'review #N', 're-check the new head', or reviewing another session's work."
 ---
 
 # Review

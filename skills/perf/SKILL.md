@@ -1,6 +1,6 @@
 ---
 name: perf
-description: Diagnose and improve measured slowness, or report a speedup or regression you measured, against a baseline with a vetted number. Use for "this is slow", "make X faster", "optimize", "latency", "N+1", "benchmark this", "hillclimb", or before putting any before/after number in a PR.
+description: "The user's own rules for performance work: baseline, the mantras, one change per measurement, and the seven questions before reporting any number. Load for 'slow', 'optimize', 'latency', 'N+1', benchmarks, or any before/after number."
 ---
 
 # Perf

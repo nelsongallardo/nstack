@@ -1,6 +1,6 @@
 ---
 name: decision-log
-description: Record decisions, assumptions, and open questions so they survive the session and can be reviewed by others. Covers a per-run decision trail (TSV) for long or unattended work, and durable records in the docs/knowledge repo with links to the PRs that implement them. Use for "document this decision", "add the assumptions and open questions", "so we know what to ask", long autonomous runs, or any work someone will review after stepping away.
+description: "The user's own way to record decisions, assumptions, and open questions: a per-run TSV trail and durable records linked to PRs. Load for 'document this decision', 'add the assumptions/open questions', long or unattended runs, or any decision someone will review later."
 ---
 
 # Decision log

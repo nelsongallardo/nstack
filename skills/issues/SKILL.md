@@ -1,6 +1,6 @@
 ---
 name: issues
-description: Work the GitHub issue tracker. Audit issue checklists, find what is done, blocked (and on whom), or ready to start in parallel, move or close finished issues, and triage new bug reports without duplicates. Use for "what can we unblock", "what's left in the epic", "check the checklists", "move the done issues", "what can run in parallel", or "triage this bug report".
+description: "The user's own procedure for the issue tracker: audit checklists, find done/blocked/ready work and parallel lanes, update issues, triage bug reports. Load for 'what can we unblock', 'what's left in the epic', 'check the checklists', 'move the done issues', or a new bug report."
 ---
 
 # Issues

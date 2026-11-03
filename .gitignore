@@ -2,3 +2,4 @@ decisions.tsv
 .audit/
 artifacts/
 .DS_Store
+evals/results/

@@ -1,6 +1,6 @@
 ---
 name: supabase
-description: Work safely with Supabase and Postgres, including migrations (ordering, naming, applied state per environment), RLS policies and grants, auth on the server, local vs preview vs production, and SQL functions. Use when writing or reviewing a migration, a policy, a grant, a SQL function, Supabase auth code, or seed data, or when deploying DB changes.
+description: "The user's own rules for Supabase and Postgres: migration ordering against applied environments, RLS policies, grants, SQL functions, SSR auth. Load before writing or reviewing any migration, SQL, policy, grant, seed, or Supabase auth code, or before deploying DB changes."
 ---
 
 # Supabase / Postgres

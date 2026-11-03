@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: Change the structure of code without changing its behavior. Covers renames, extractions, consolidations, layering changes, API migrations, and deleting legacy paths. Use for "refactor", "clean this up", "restructure", "rename X to Y", "migrate callers", "remove the old API", or "simplify this module".
+description: "The user's own refactoring rules: pin behavior, subtract first, reshape, migrate callers and delete the old path, check renames. Load for 'refactor', 'clean up', 'restructure', 'rename', 'migrate callers', or 'remove the old API'."
 ---
 
 # Refactor

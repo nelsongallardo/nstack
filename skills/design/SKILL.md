@@ -1,6 +1,6 @@
 ---
 name: design
-description: Shape a change before writing code when it crosses function or module boundaries, moves ownership, adds a public API, or has more than one plausible structure. Covers usage-first sketches, types and signatures, designing it twice, red flags, and when to prototype instead of debating. Use for "design this", "how should we structure", "architect", "where should this live", a new module, service, endpoint, or shared component, or an open question you could settle by trying it.
+description: "The user's own design procedure: caller usage first, types and signatures, design it twice, red flags, prototype instead of debating. Load before building a new module, service, endpoint, shared component, or any change with more than one plausible structure, and for 'where should this live'."
 ---
 
 # Design

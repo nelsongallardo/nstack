@@ -1,6 +1,6 @@
 ---
 name: address-review
-description: Triage and act on review feedback received on your own code, from a reviewer session, a bot, or a person. Classify each comment as fix, dismiss, or ask, and don't churn on nitpicks. Use for "address the review", "look at the comments and address them", "fix the review findings", "address the bot comments", or a reviewer report handed back to the author.
+description: "The user's own procedure for review feedback on your code: fix, dismiss, or ask per comment, one push, replies with SHA or disproof. Load when a review report, bot comment, or PR review comment arrives, and for 'address the review' or 'fix the findings'."
 ---
 
 # Address review

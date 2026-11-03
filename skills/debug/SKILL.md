@@ -1,6 +1,6 @@
 ---
 name: debug
-description: Find and fix the root cause of a bug, failing test, flaky behavior, leak, spin, or production error, using runtime evidence instead of theory. Use for "fix this bug", "why is X broken", "it's failing again", "still not working", a stack trace or error report, or diagnosing a captured profile, trace, or heap snapshot.
+description: "The user's own debugging procedure: recorded state first, reproduce on the user's surface, runtime evidence, fix at the root, what to do after two failed fixes. Load for any bug, error, failing test, leak, flaky behavior, 'still broken', 'why is X happening', or a stack trace."
 ---
 
 # Debug
