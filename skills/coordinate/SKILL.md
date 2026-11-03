@@ -44,7 +44,7 @@ Always fill in the Skills line. A worker that receives a detailed brief treats i
 
 ## 3. Isolation
 
-- Use one git worktree per writing agent: `herdr worktree create` under Herdr (section 4), Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Create the worktree before starting the agent in it. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
+- Use one git worktree per writing agent: Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Create the worktree before starting the agent in it. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
 - Only the coordinator writes to shared external surfaces: GitHub comments, issues, merges, prod. Workers push their own branch at most.
 - Freeze each target up front: capture the PR or issue number once, then check it before every external write.
 
