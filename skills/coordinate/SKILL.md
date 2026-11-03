@@ -1,6 +1,6 @@
 ---
 name: coordinate
-description: "The user's own procedure for multi-agent work: splitting work, briefs that name skills, worktrees, the build-review-fix loop, retries, pickup, pause. Load whenever work involves more than one agent or session: 'open/start N sessions', 'in parallel', 'delegate', 'finish the epic', briefing a subagent, or picking up another session's work."
+description: "The user's own procedure for multi-agent work: splitting work, briefs that name skills, worktrees, the build-review-fix loop, retries, pickup, pause. Load whenever work involves more than one agent or session: 'open/start N sessions', 'in parallel', 'delegate', 'hand this off', 'run it in another pane', 'finish the epic', briefing a subagent or a Herdr agent, or picking up another session's work."
 ---
 
 # Coordinate
@@ -44,11 +44,31 @@ Always fill in the Skills line. A worker that receives a detailed brief treats i
 
 ## 3. Isolation
 
-- Use one git worktree per writing agent: Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
+- Use one git worktree per writing agent: `herdr worktree create` under Herdr (section 4), Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Create the worktree before starting the agent in it. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
 - Only the coordinator writes to shared external surfaces: GitHub comments, issues, merges, prod. Workers push their own branch at most.
 - Freeze each target up front: capture the PR or issue number once, then check it before every external write.
 
-## 4. The loop per PR
+## 4. Under Herdr, delegates run where the user can see them
+
+Herdr is available when `HERDR_ENV=1` and `HERDR_PANE_ID` matches a pane in `herdr agent list`, or when `herdr` is on PATH and `herdr agent list` shows the pane you run in. Then the user's standing rule applies: delegate in a Herdr pane, tab, or worktree workspace, not an in-process background subagent. That rule is the explicit request the `herdr` skill asks for before it creates panes, tabs, or worktrees. Without Herdr, use the harness's own subagents. For syntax, `herdr <group>` and `herdr --skill` are the authority.
+
+| The work | Where it runs |
+|---|---|
+| A delegate that writes code in the same repo | A child worktree workspace (below) |
+| A short delegate the user watches; work that needs the user's input (installs, logins, approvals); work in another repo, or in a repo with no open workspace | A sibling pane in the caller's tab |
+| A long-running delegate the user checks now and then, with no separate worktree needed | A new tab in the same workspace: `herdr tab create --cwd <dir> --no-focus` |
+| A short read-only lookup | An in-process subagent |
+
+- **Child worktree workspace.** Run `herdr worktree create --workspace <repo workspace> --branch <b> --base <ref> --no-focus`. Herdr links it to the repo's workspace, so the sidebar shows it as a child in the repo's tree with its own branch, and `workspace close --group` closes them together. Don't hand-make a `git worktree add` plus a pane split for this case.
+- **Sibling pane.** Read `herdr pane layout --pane <caller>`. Split a wide pane right and a narrow or tall pane down, and don't stack splits into unusably narrow columns: `herdr pane split --pane <caller> --direction right|down --cwd <dir> --no-focus`.
+- **Start the agent** in the new pane, or in the new workspace's or tab's root pane: take its ID from the JSON output (or `herdr pane list --workspace <id>`), then run `herdr agent start <name> --kind claude|codex --pane <id>`.
+- **Never delegate into a separate Herdr session** (`herdr session`). It runs its own server, which the user's view doesn't show.
+- **Address agents explicitly.** Give each agent a unique name. Target it by that name or its pane ID, never by UI focus.
+- **Brief and watch.** Send the brief with `herdr agent prompt <name> "<brief>"`. Check progress with `herdr agent get`, `read`, and `wait`. The report still goes to a file path you read on the same machine.
+- **A timeout doesn't mean the prompt failed.** `agent prompt --wait` can return `timeout` while the agent is already working. Check `herdr agent get` before resending, and never resubmit blindly.
+- **A new folder means a trust dialog.** Claude Code started in a fresh worktree stops at its folder-trust dialog. Read the pane. Accept only for a folder the user asked you to work in. Otherwise ask the user.
+
+## 5. The loop per PR
 
 ```
 owner: build → preflight → push branch → open PR → report
@@ -62,29 +82,29 @@ PASS → land
 - Spend verification in proportion to the change. A rebase, a conflict resolution, or a minor fix gets a single re-check at the new head. A wording-only change gets none. A full review repeats only for new behavior or a large new diff.
 - Opening a PR doesn't start a watch. Post the URL and keep building.
 
-## 5. Running agents
+## 6. Running agents
 
 - **Own every delegate's work.** Read the diff and write your own summary. Don't pass through what the delegate said.
 - **Use fresh agents with consolidated scope:** the original brief, every later directive, and the prior agent's report and branch. Resumed or interrupted agents silently drop directives. Reuse an agent only when the work needs state that lives in it (uncommitted changes, a running dev server).
 - **A role outlives its agent.** When a pane's context is spent, start a fresh session in that pane with a consolidated brief.
-- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity.
+- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity, `herdr agent get`.
 - **Keep agents rolling.** Start the next unit as each one finishes, not in batches. Three to five concurrent sessions is the practical ceiling.
 - **Retry by cause.** After a context limit, retry with a smaller scope. After a dropped connection, reuse the same brief. After a tool error, switch models (Claude ↔ Codex). After two retries, drop the unit and replan around it.
-- **Second opinions.** Give the same brief to the other model family. Agreement is a strong signal.
+- **Second opinions.** Give the same brief to the other model family (under Herdr, a `--kind codex` agent). Agreement is a strong signal.
 - **Competing implementations.** When a design could take several valid shapes, give Claude and Codex the same brief in separate worktrees. Score both against 3 to 6 criteria you wrote down first (not shown to them). Pick the base a maintainer can extend most easily, and graft in one or two good ideas by hand. If they converge, ship that. If they diverge wildly, the brief was underspecified, so rewrite it instead of averaging.
 
-## 6. What reaches the user
+## 7. What reaches the user
 
 Ask the user only for irreversible actions, preference or product calls, and dead ends that survived a replan. Rebase mechanics, retries, CI flakes, review triage, and "should I keep going" never reach the user. Under "don't ask me anything, get it to production", apply defaults and report each one with what the user could have chosen instead.
 
-## 7. Merge order and rebases
+## 8. Merge order and rebases
 
 - Land through `land`: bottom-up, verdict current by patch-id, and the result read back.
 - Rebase each branch onto main before its final review, so verification runs on the base it will land on. Don't rebase on every trunk move.
 - Migration-bearing PRs: before merging, make sure their migration timestamps sort after everything already applied in each environment. Rename unapplied ones if needed.
 - Force-push only your own branch, with `--force-with-lease=<branch>:<sha you last pushed>`. If you see a push you didn't make, stop and report it.
 
-## 8. Long or unattended runs
+## 9. Long or unattended runs
 
 - State the exit condition as a checkable predicate before iteration 1. A duration is not a finish condition.
 - Keep a decision trail (`decision-log`). Push each finished unit before starting the next.

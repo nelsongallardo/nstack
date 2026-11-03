@@ -1,7 +1,7 @@
 {
   "name": "nstack",
   "description": "Personal engineering skills: evidence-backed review, local preflight, debugging, coordination of parallel sessions, and TypeScript/Python/Supabase rules.",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "author": { "name": "nelsongallardo", "url": "https://github.com/nelsongallardo" },
   "repository": "https://github.com/nelsongallardo/nstack",
   "license": "MIT"
