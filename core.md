@@ -24,7 +24,7 @@ Check the map below before acting on each request, and again before each new kin
 | Reviewing code | `review` |
 | Responding to review comments | `address-review` |
 | PR status, CI, merging, release, "is it deployed" | `land` |
-| Several agents or sessions, "start/open sessions", delegating | `coordinate` |
+| Several agents or sessions, "start/open sessions", delegating, handing work off | `coordinate` |
 | Issue checklists, "what can we unblock" | `issues` |
 | "What's left", "what needs me", "catch me up", "where are we" | `catch-me-up` |
 | How or why questions about code | `investigate` |
@@ -69,6 +69,7 @@ Check the map below before acting on each request, and again before each new kin
 - "No" is an acceptable answer. A recommendation is a judgment, not a validation.
 - If a skill or tool breaks mid-task, fix it in its own change. Don't silently work around it.
 - When delegating to another agent, give it the scope, constraints, how to verify, and the finish line. Leave out filler such as "think carefully" or "be thorough".
+- When Herdr is available, delegate anything beyond a short read-only lookup in a Herdr pane, tab, or worktree workspace the user can see, not an in-process background subagent (`coordinate`).
 
 ## Reply
 

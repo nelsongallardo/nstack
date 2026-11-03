@@ -1,6 +1,6 @@
 ---
 name: coordinate
-description: "The user's own procedure for multi-agent work: splitting work, briefs that name skills, worktrees, the build-review-fix loop, retries, pickup, pause. Load whenever work involves more than one agent or session: 'open/start N sessions', 'in parallel', 'delegate', 'finish the epic', briefing a subagent, or picking up another session's work."
+description: "The user's own procedure for multi-agent work: splitting work, briefs that name skills, worktrees, the build-review-fix loop, retries, pickup, pause. Load whenever work involves more than one agent or session: 'open/start N sessions', 'in parallel', 'delegate', 'hand this off', 'run it in another pane', 'finish the epic', briefing a subagent or a Herdr agent, or picking up another session's work."
 ---
 
 # Coordinate
@@ -44,11 +44,26 @@ Always fill in the Skills line. A worker that receives a detailed brief treats i
 
 ## 3. Isolation
 
-- Use one git worktree per writing agent: Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
+- Use one git worktree per writing agent: Claude Code `isolation: "worktree"`, or `git worktree add ../<repo>-<slug> -b <branch> <sha>` for a separate terminal session or Codex. Create the worktree before starting the agent in it. Never run two writers in one worktree. They overwrite each other, and nobody can tell which agent changed what.
 - Only the coordinator writes to shared external surfaces: GitHub comments, issues, merges, prod. Workers push their own branch at most.
 - Freeze each target up front: capture the PR or issue number once, then check it before every external write.
 
-## 4. The loop per PR
+## 4. Under Herdr, delegates run where the user can see them
+
+Herdr is available when `HERDR_ENV=1` and `HERDR_PANE_ID` matches a pane in `herdr agent list`, or when `herdr` is on PATH and `herdr agent list` shows the pane you run in. Then the user's standing rule applies: delegate in a Herdr pane, tab, or worktree workspace, not an in-process background subagent. That rule is the explicit request the `herdr` skill asks for before it creates panes, tabs, or worktrees. Without Herdr, use the harness's own subagents.
+
+| The work | Where it runs |
+|---|---|
+| A delegate that writes code in the same repo | A child worktree workspace, linked to the repo's workspace |
+| A short delegate the user watches; work that needs the user's input (installs, logins, approvals); work in another repo, or in a repo with no open workspace | A sibling pane in the caller's tab |
+| A long-running delegate the user checks now and then, with no separate worktree needed | A new tab in the same workspace |
+| A short read-only lookup | An in-process subagent |
+
+Never delegate into a separate Herdr session (`herdr session`). It runs its own server, which the user's view doesn't show.
+
+Before you create the pane, tab, or workspace, read `references/herdr.md`. It holds the commands and the gotchas that stall a new agent.
+
+## 5. The loop per PR
 
 ```
 owner: build → preflight → push branch → open PR → report
@@ -62,7 +77,7 @@ PASS → land
 - Spend verification in proportion to the change. A rebase, a conflict resolution, or a minor fix gets a single re-check at the new head. A wording-only change gets none. A full review repeats only for new behavior or a large new diff.
 - Opening a PR doesn't start a watch. Post the URL and keep building.
 
-## 5. Running agents
+## 6. Running agents
 
 - **Own every delegate's work.** Read the diff and write your own summary. Don't pass through what the delegate said.
 - **Use fresh agents with consolidated scope:** the original brief, every later directive, and the prior agent's report and branch. Resumed or interrupted agents silently drop directives. Reuse an agent only when the work needs state that lives in it (uncommitted changes, a running dev server).
@@ -73,18 +88,18 @@ PASS → land
 - **Second opinions.** Give the same brief to the other model family. Agreement is a strong signal.
 - **Competing implementations.** When a design could take several valid shapes, give Claude and Codex the same brief in separate worktrees. Score both against 3 to 6 criteria you wrote down first (not shown to them). Pick the base a maintainer can extend most easily, and graft in one or two good ideas by hand. If they converge, ship that. If they diverge wildly, the brief was underspecified, so rewrite it instead of averaging.
 
-## 6. What reaches the user
+## 7. What reaches the user
 
 Ask the user only for irreversible actions, preference or product calls, and dead ends that survived a replan. Rebase mechanics, retries, CI flakes, review triage, and "should I keep going" never reach the user. Under "don't ask me anything, get it to production", apply defaults and report each one with what the user could have chosen instead.
 
-## 7. Merge order and rebases
+## 8. Merge order and rebases
 
 - Land through `land`: bottom-up, verdict current by patch-id, and the result read back.
 - Rebase each branch onto main before its final review, so verification runs on the base it will land on. Don't rebase on every trunk move.
 - Migration-bearing PRs: before merging, make sure their migration timestamps sort after everything already applied in each environment. Rename unapplied ones if needed.
 - Force-push only your own branch, with `--force-with-lease=<branch>:<sha you last pushed>`. If you see a push you didn't make, stop and report it.
 
-## 8. Long or unattended runs
+## 9. Long or unattended runs
 
 - State the exit condition as a checkable predicate before iteration 1. A duration is not a finish condition.
 - Keep a decision trail (`decision-log`). Push each finished unit before starting the next.
