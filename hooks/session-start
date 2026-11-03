@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Injects nstack core.md into every Claude Code session.
+set -euo pipefail
+root="${CLAUDE_PLUGIN_ROOT:-$(cd "${0%/*}/.." && pwd)}"
+core="$root/core.md"
+[ -r "$core" ] || exit 0
+s="$(<"$core")"
+s="${s//\\/\\\\}"; s="${s//\"/\\\"}"; s="${s//$'\n'/\\n}"; s="${s//$'\r'/\\r}"; s="${s//$'\t'/\\t}"
+printf '{"hookSpecificOutput":{"hookEventName":"SessionStart","additionalContext":"%s"}}\n' "$s"

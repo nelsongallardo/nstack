@@ -1,0 +1,8 @@
+{
+  "name": "nstack",
+  "owner": { "name": "nelsongallardo" },
+  "metadata": { "description": "nstack personal skills", "version": "0.1.0" },
+  "plugins": [
+    { "name": "nstack", "source": "./", "description": "Personal engineering skills and always-on core rules." }
+  ]
+}
