@@ -25,8 +25,8 @@ Append rows with `scripts/log.sh <file> <phase> <decision> <why> <evidence> <res
 **Before handing back:**
 
 1. Walk the rows against what actually happened. Every row is a real decision, every pointer resolves, and unlogged forks get added. Correct the log, not the story.
-2. For long or unattended runs, have the other model family review the trail (`codex exec` for a Claude run, `claude -p` for a Codex run). It flags weak evidence, verification claimed but never run, risky calls, and gaps.
-3. End the reply with **Attention:** `reviewed by <model>`, then the flags pointing at rows. "No flags" is a valid value.
+2. Seek an independent review of the trail when a consequential decision still rests on uncertain evidence or conflicting records. Give the reviewer the relevant rows and artifacts to check for unsupported claims and gaps. Duration alone does not require another model.
+3. If independently reviewed, end the reply with **Attention:** `reviewed by <model>`, then the flags pointing at rows. "No flags" is a valid value. Otherwise report unresolved evidence gaps directly without implying an independent review occurred.
 
 ## 2. The record (durable)
 

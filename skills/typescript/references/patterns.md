@@ -83,11 +83,11 @@ A time range, as start plus duration:
 // Don't: a comment holds the invariant
 type TimeRange = { start: Date; end: Date }; // start <= end
 
-// Do: a negative range can't be written; derive end when needed
+// Derive end from start and duration; validate duration at construction
 type TimeRange = { start: Date; durationMs: number };
 ```
 
-Keep `durationMs` a plain number. Brand it (per Branded types) only if a raw number could be passed where a duration is expected, not by reflex. Pick the representation that makes the bad state unconstructable, then expose the reading you need on top (`pairs.flat()`, a `rangeEnd()` helper).
+The plain `number` type still permits negative and non-finite durations. Validate that `durationMs` is finite and nonnegative at construction. If callers need the type to carry that guarantee, use a branded duration created only by the validating constructor. Start plus duration makes deriving the end convenient; it does not enforce the range invariant on its own.
 
 ## Simplest total type
 

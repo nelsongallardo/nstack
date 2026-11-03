@@ -58,7 +58,7 @@ The contract decides what to assert, not the shape of the assertion:
 
 1. Pick the narrowest existing place to add the test.
 2. Write the failing test, then **run it before fixing**. Confirm it fails for the intended reason. If it passes, or fails for an unrelated reason, fix the test or the repro first.
-3. Make the smallest fix and rerun. Land the regression test first, then sibling coverage.
+3. Make the smallest fix and rerun. Land the regression test with the fix, then add sibling coverage where it catches a distinct failure mode.
 4. Never change a test to match a wrong implementation. Never weaken an assertion unless the expected behavior really changed.
 
 ## Reply

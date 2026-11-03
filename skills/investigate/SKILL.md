@@ -15,9 +15,9 @@ If the user embeds a guess ("I assume it's for performance?"), treat it as a lea
 
 ## 1. How
 
-1. **Size it.** For a narrow question, explore and answer in one pass. For a subsystem or cross-cutting question, spawn 2 to 4 read-only explorers in one message, each with a distinct angle: "Focus on your angle and go deep."
-2. **Each explorer returns:** Components, Flow, Files Read, Boundaries, Non-obvious things, Open questions.
-3. **Merge them yourself.** Resolve contradictions by checking the code.
+1. **Size it.** Start with one focused pass. Use read-only explorers when independent areas need separate investigation or unresolved uncertainty warrants another perspective. Give each a distinct question; a cross-cutting topic alone does not require multiple agents.
+2. **If delegated, each explorer returns:** Components, Flow, Files Read, Boundaries, Non-obvious things, Open questions.
+3. **Merge delegated findings yourself.** Resolve contradictions by checking the code.
 4. **Answer format:**
    - Overview: someone can read only this and decide whether to keep reading.
    - Key concepts.
@@ -39,7 +39,7 @@ rg -n -C2 '(TODO|FIXME|HACK|NOTE)' <file>
 rg -l '<symbol>' --glob '*test*'         # tests encode the edge cases that motivated a change
 ```
 
-**Search every evidence category**, one investigator each when the question is big:
+**Search every evidence category.** Delegate independent searches only when the scope or unresolved uncertainty warrants it:
 
 - Source control and PR reviews (always).
 - The issue tracker: the business forcing function. Parent issues carry the why, sub-issues are tactical.

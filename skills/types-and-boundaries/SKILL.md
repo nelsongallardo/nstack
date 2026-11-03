@@ -27,7 +27,7 @@ Two questions decide where code goes:
 
 ## Identity and authority come from the session
 
-The caller's identity, org, and role come from the verified session and the server, never from IDs, cookies, or fields the client sends. Request contracts carry no actor, org, or email fields. Authorization happens on the server for every operation, including reads.
+The caller's authority comes from the verified session and server-side authorization. Request contracts may carry target IDs, organization selections, invitation emails, and other business data; none of those fields proves the caller's identity, membership, or role. Authorize access to the requested target on the server for every operation, including reads.
 
 ## Brand what gets mixed up
 
@@ -61,7 +61,7 @@ Build shapes where the illegal value can't exist:
 
 - A non-empty list as head plus tail.
 - Pairs as a list of 2-tuples.
-- A range as start plus duration, not start plus end.
+- A range constructed from a valid start and a validated finite, nonnegative duration. Plain numeric fields alone do not enforce the invariant.
 
 Apply the simplest-total-type rule. Otherwise return `T | undefined` / `Optional[T]` and let the caller handle it.
 

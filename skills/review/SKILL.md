@@ -22,13 +22,13 @@ Don't adversarially review an abstract plan. Reviewers invent risks that never h
 
 Size the effort to the diff.
 
-- **Small** (one area, under ~200 changed lines): review it yourself, covering all three lenses.
-- **Large or risky** (migrations, auth/RLS, money, multiple services, or over ~200 lines): spawn one fresh subagent per lens in parallel, in the background. Give each the scope, the intent, its lens, and the rules in sections 3 and 4. Also start the **second model** (below). Merge all results yourself and verify every finding before reporting it.
+- **Default:** review it yourself, covering all three lenses. Line count alone does not require delegation.
+- **Escalate** when independent areas need separate investigation, uncertainty survives a focused pass, or a plausible failure has serious consequences (such as data loss, an authorization bypass, or an incorrect charge). Delegate the relevant lenses or seek a second model's assessment of the specific risk. Give each reviewer the scope, intent, assigned question, and rules in sections 3 and 4. Merge the results yourself and verify every finding before reporting it.
 - The user can ask for the second model on any size ("review with codex", "cross-model").
 
 ### Second model
 
-A different model misses different things. Two models finding the same root cause on their own is the strongest signal a review can give. Run the other harness as one more independent reviewer, in a throwaway worktree at the head SHA, in the background, so it can run repros without touching the real checkout.
+A different model can expose a missed assumption, but agreement alone does not verify a finding. A reproducible failure is stronger evidence. When a second opinion is warranted, run the other harness in a throwaway worktree at the head SHA, in the background, so it can run repros without touching the real checkout.
 
 - From Claude Code, run Codex:
   `codex exec -C <worktree> -s workspace-write -c model_reasoning_effort="high" -o <out.md> "<prompt>"`
@@ -38,7 +38,7 @@ A different model misses different things. Two models finding the same root caus
 
 Merging:
 
-- **Same root cause from both models:** mark it `found by: both`. It ranks first within its severity.
+- **Same root cause from both models:** mark it `found by: both`. Rank by severity and evidence, not agreement alone.
 - **Only one model found it:** verify it yourself by rerunning its evidence. Don't drop it just because the other model missed it.
 - **Critical but still unverified:** send the other model a targeted follow-up: "Try to reproduce this: `<scenario>`. Report the command and output, or why it can't happen." Its answer moves the finding to verified, or to Cleared.
 - If the second model fails or times out, report without it and say so.
@@ -139,8 +139,8 @@ The verdict isn't clean without lens C. If you couldn't run the change, the best
 
 Use this when given a prior report and a new head SHA.
 
-1. If `git patch-id` of the old and new patch match (a pure rebase), say so. Carry the prior verdict and stop.
+1. Compare patch IDs using each revision's own base. If they match, preserve findings about the patch, then inspect changes between the old and new bases for affected callers, dependencies, configuration, and contracts. Rerun affected checks before carrying the verdict forward. Stop only when no relevant base changes remain unverified; otherwise review their interaction with the patch.
 2. For each prior finding, rerun its evidence command at the new head. Mark it **resolved**, **partly resolved** (what's left), or **not resolved**.
-3. Review only `old-head..new-head`, under sections 3 and 4. A fix can introduce its own bug, so check the fix code hardest.
-4. No new findings on code that was unchanged since the last review, unless the delta makes it reachable.
+3. Review changes to the patch and relevant base interactions, under sections 3 and 4. A fix can introduce its own bug, so check the fix code hardest.
+4. No new findings on unchanged code unless the patch or base changes make the failure reachable.
 5. Report the same shape, with a "Prior findings" section first.

@@ -67,7 +67,7 @@ Before you create the pane, tab, or workspace, read `references/herdr.md`. It ho
 
 ```
 owner: build → preflight → push branch → open PR → report
-reviewer (fresh session, not the owner; + Codex when large/risky): review → report
+reviewer (fresh session, not the owner; second opinion when warranted): review → report
 owner: address-review → preflight → one push → report with new head SHA
 reviewer: review in re-review mode on the new head
 PASS → land
@@ -85,7 +85,7 @@ PASS → land
 - **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity.
 - **Keep agents rolling.** Start the next unit as each one finishes, not in batches. Three to five concurrent sessions is the practical ceiling.
 - **Retry by cause.** After a context limit, retry with a smaller scope. After a dropped connection, reuse the same brief. After a tool error, switch models (Claude ↔ Codex). After two retries, drop the unit and replan around it.
-- **Second opinions.** Give the same brief to the other model family. Agreement is a strong signal.
+- **Second opinions.** Seek another model's assessment when uncertainty remains or the consequence of a plausible failure warrants it. Give it the same evidence and question. Agreement helps identify hypotheses to check; it does not replace verification.
 - **Competing implementations.** When a design could take several valid shapes, give Claude and Codex the same brief in separate worktrees. Score both against 3 to 6 criteria you wrote down first (not shown to them). Pick the base a maintainer can extend most easily, and graft in one or two good ideas by hand. If they converge, ship that. If they diverge wildly, the brief was underspecified, so rewrite it instead of averaging.
 
 ## 7. What reaches the user
@@ -94,7 +94,7 @@ Ask the user only for irreversible actions, preference or product calls, and dea
 
 ## 8. Merge order and rebases
 
-- Land through `land`: bottom-up, verdict current by patch-id, and the result read back.
+- Land through `land`: bottom-up, verdict current for both the patch and relevant base changes, and the result read back.
 - Rebase each branch onto main before its final review, so verification runs on the base it will land on. Don't rebase on every trunk move.
 - Migration-bearing PRs: before merging, make sure their migration timestamps sort after everything already applied in each environment. Rename unapplied ones if needed.
 - Force-push only your own branch, with `--force-with-lease=<branch>:<sha you last pushed>`. If you see a push you didn't make, stop and report it.

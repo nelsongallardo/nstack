@@ -38,7 +38,7 @@ Stop at the first one that meets the target.
 - Accept a change only when the metric moves past the noise floor and the gate stays green. Otherwise revert all of it. Never stack untested changes.
 - Make one commit per accepted win, staging named files only.
 - For a long run, keep a gitignored `decision.tsv`, one row per attempt: `id, hypothesis, change, before, after, delta, tests, verdict, note`. Read it before each attempt.
-- Set a target plus a minimum number of attempts, so a lucky early win doesn't end the run.
+- Stop when the target is met across repeated measurements and the regression gate passes. Confirm an apparent early win with the frozen harness; do not require more optimization attempts once the result holds.
 - At a plateau, switch to a different category of fix, combine near-misses, or re-read the source. Correctness and simplicity outrank the number. Revert a win that breaks behavior. Keep a simplification that holds the number.
 - Stop honestly. Don't relax the target to meet it.
 
