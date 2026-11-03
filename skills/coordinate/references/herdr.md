@@ -10,7 +10,7 @@ Read this before you create a pane, tab, or workspace for a delegate. `coordinat
 
 ## Start and run the agent
 
-- **Start it** in the new pane, or in the new workspace's or tab's root pane. Take the pane ID from the JSON output (or `herdr pane list --workspace <id>`), then run `herdr agent start <name> --kind claude|codex --pane <id>`.
+- **Start it** in the new pane, or in the new workspace's or tab's root pane. Take the pane ID from the JSON output (or `herdr pane list --workspace <id>`), then run `herdr agent start <name> --kind claude|codex --pane <id>`. Use `--kind codex` for the second opinions and competing implementations in `coordinate` section 6.
 - **Address agents explicitly.** Give each agent a unique name. Target it by that name or its pane ID, never by UI focus.
 - **Brief and watch.** Send the brief with `herdr agent prompt <name> "<brief>"`. Check progress with `herdr agent get`, `read`, and `wait`. The report still goes to a file path you read on the same machine.
 

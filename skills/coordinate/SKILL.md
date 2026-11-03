@@ -82,10 +82,10 @@ PASS → land
 - **Own every delegate's work.** Read the diff and write your own summary. Don't pass through what the delegate said.
 - **Use fresh agents with consolidated scope:** the original brief, every later directive, and the prior agent's report and branch. Resumed or interrupted agents silently drop directives. Reuse an agent only when the work needs state that lives in it (uncommitted changes, a running dev server).
 - **A role outlives its agent.** When a pane's context is spent, start a fresh session in that pane with a consolidated brief.
-- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity, `herdr agent get`.
+- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity.
 - **Keep agents rolling.** Start the next unit as each one finishes, not in batches. Three to five concurrent sessions is the practical ceiling.
 - **Retry by cause.** After a context limit, retry with a smaller scope. After a dropped connection, reuse the same brief. After a tool error, switch models (Claude ↔ Codex). After two retries, drop the unit and replan around it.
-- **Second opinions.** Give the same brief to the other model family (under Herdr, a `--kind codex` agent). Agreement is a strong signal.
+- **Second opinions.** Give the same brief to the other model family. Agreement is a strong signal.
 - **Competing implementations.** When a design could take several valid shapes, give Claude and Codex the same brief in separate worktrees. Score both against 3 to 6 criteria you wrote down first (not shown to them). Pick the base a maintainer can extend most easily, and graft in one or two good ideas by hand. If they converge, ship that. If they diverge wildly, the brief was underspecified, so rewrite it instead of averaging.
 
 ## 7. What reaches the user
