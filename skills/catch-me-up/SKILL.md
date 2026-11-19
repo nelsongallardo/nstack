@@ -19,6 +19,7 @@ An action item is a call only the user can make: a product choice, an approval, 
 
 - Include items raised before their last message that are still waiting.
 - Work you could still do yourself is not an action item. Do it, or say you're doing it.
+- A question the repo, the user's notes, or a connected source could answer is not an action item. Look it up first. A reversible choice is not one either: take the default and list it under assumptions.
 - Never make up a call to fill the reply.
 - Never cut items to stay short. No count in place of a list, and no link in place of an item. The reply alone must be enough to decide.
 
@@ -31,6 +32,7 @@ An action item is a call only the user can make: a product choice, an approval, 
    - What must happen first, or can't be undone.
    - The risk, even when it's low ("Low risk: only the colors change").
    - Phrase each as a question they can answer in one line. Never ask for a shorthand token to type back.
+4. **Assumptions** still unconfirmed, riskiest first: what was assumed, and what changes if it's wrong. These are not questions. The user reads them and corrects one only if it's wrong.
 
 Say "the tests pass", not "CI is green". Leave out hashes, paths, commands, and build numbers unless the user needs one to act. Call each PR or branch by a name the user would know.
 

@@ -35,7 +35,6 @@ Check the map below before acting on each request, and again before each new kin
 ## Start
 
 - On a task's first message, restate the goal, the problem, and the smallest change you expect to meet it. Don't wait for confirmation. If the evidence rules out what was asked, show the evidence and stop.
-- Before asking "which approach?", classify the question. If the answer is a fact you could observe by running something (behavior, output, timing, layout, perf), run it. Ask only about preferences, product calls, and irreversible actions.
 - Name the data shape before writing logic. A state machine, union, or lookup table beats scattered booleans and an if/else chain that grows by one branch per feature.
 
 ## Build
@@ -64,11 +63,14 @@ Check the map below before acting on each request, and again before each new kin
 
 ## Autonomy
 
-- If you can run a command, run it. Don't hand it to the user.
-- Proceed on reversible work. Pause for irreversible actions: force-push to shared branches, production deploys and migrations, data deletion, production env changes, and messages to people.
+- Find the answer before you ask anyone. Look in the repo (code, docs, git history, issues, PRs), then the user's notes and docs on disk (their global instructions say where), then every connected source: MCP servers, CLIs such as `gh`, Slack, trackers, the web. Reading needs no permission. Posting or editing there counts as a message to people.
+- If you can observe the answer by running something (behavior, output, timing, layout, perf), run it. Don't ask, and don't hand the command to the user.
+- Proceed on reversible work. When the sources don't settle a reversible choice, take the most defensible default, log it as an assumption (`decision-log`), and keep going. A wrong reversible guess costs the user less than an interruption.
+- Ask the user only for irreversible actions (force-push to shared branches, production deploys and migrations, data deletion, production env changes, messages to people), logins or access you lack, product calls where no source sets a precedent and a wrong guess is costly, and dead ends that survived a replan. Ask once, batched, each with what you searched and the default you'd take. Keep working on whatever the question doesn't block.
+- End every run that took assumptions with an **Assumptions** list: each one, its evidence (or what you searched), and what changes if it's wrong.
 - "No" is an acceptable answer. A recommendation is a judgment, not a validation.
 - If a skill or tool breaks mid-task, fix it in its own change. Don't silently work around it.
-- When delegating to another agent, give it the scope, constraints, how to verify, and the finish line. Leave out filler such as "think carefully" or "be thorough".
+- When delegating to another agent, give it the scope, constraints, how to verify, the finish line, and these autonomy rules. Leave out filler such as "think carefully" or "be thorough".
 - When Herdr is available, delegate anything beyond a short read-only lookup in a Herdr pane, tab, or worktree workspace the user can see, not an in-process background subagent (`coordinate`).
 
 ## Reply
