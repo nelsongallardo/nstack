@@ -35,10 +35,13 @@ May write: <paths> | Must not: push to main, merge, comment on GitHub, run prod 
 Data shape: <the types / state machine / table this change is built around>
 Skills: <the nstack skills to load, per step: e.g. typescript + supabase + tests while building, cleanup before commit, preflight before push, writing for the PR body>
 Context: <upstream reports, pasted in full, not linked>
-Report to: <path>, containing: head SHA, what was built, verification run + output, deferred items, anything the coordinator must know. Reply with only the path.
+Questions: don't stop to ask me or the user. Find the answer in the repo, the user's notes and docs, and every connected source (MCP servers, CLIs, Slack, the web). If they don't settle a reversible choice, take the most defensible default, log it, and keep going. Stop only for: <the irreversible actions and logins that apply to this unit>.
+Report to: <path>, containing: head SHA, what was built, verification run + output, assumptions (each with its evidence or what was searched, and what changes if wrong), deferred items, anything the coordinator must know. Reply with only the path.
 ```
 
 If you can't name the evidence for "done", the unit isn't scoped yet.
+
+Always fill in the Questions line. Without it, a worker asks you about every fork, and you end up forwarding those questions to the user.
 
 Always fill in the Skills line. A worker that receives a detailed brief treats it as complete and won't look for skills on its own.
 
@@ -90,7 +93,13 @@ PASS → land
 
 ## 7. What reaches the user
 
-Ask the user only for irreversible actions, preference or product calls, and dead ends that survived a replan. Rebase mechanics, retries, CI flakes, review triage, and "should I keep going" never reach the user. Under "don't ask me anything, get it to production", apply defaults and report each one with what the user could have chosen instead.
+You are the user's filter. A delegate's question goes to you, never straight to the user.
+
+1. **Answer it yourself.** Search the sources in `core.md` Autonomy, plus the other workers' reports and the decision log. Send the answer to the delegate, and add it to the brief for the next unit.
+2. **Still open and reversible?** Pick the default, log it as an assumption, and tell the delegate to proceed.
+3. **Only then ask the user**, and only for what `core.md` Autonomy lists: irreversible actions, missing logins or access, costly product calls with no precedent, and dead ends that survived a replan. Batch every pending question into one message, each with what you searched and your default. Keep the other units running while you wait.
+
+Rebase mechanics, retries, CI flakes, review triage, naming, file layout, and "should I keep going" never reach the user. Under "don't ask me anything, get it to production", apply defaults even to product calls, and report each one with what the user could have chosen instead.
 
 ## 8. Merge order and rebases
 
@@ -119,5 +128,5 @@ Pause only on an explicit request. Finish or back out of the current step, start
 - Units and their owners.
 - Each PR's state and verdict.
 - What merged.
-- Decisions taken under defaults.
+- **Assumptions**: yours and every delegate's, merged from their reports. Each one gets its evidence, what changes if it's wrong, and the PR that depends on it.
 - What waits on the user (see `catch-me-up`).

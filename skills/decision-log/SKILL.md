@@ -12,7 +12,7 @@ There are two layers. The **trail** is raw, per run, and local. The **record** i
 Append rows with `scripts/log.sh <file> <phase> <decision> <why> <evidence> <result>`. The script stamps UTC time, keeps cells on one line, and neutralizes spreadsheet formulas. Columns: `ts phase decision why evidence result`.
 
 - **File:** `decisions.tsv` at the worktree root, or `.audit/<task-slug>.tsv` when several efforts run at once. Gitignored by default.
-- **Log:** forks chosen, units completed with their verification result, pivots or reverts with their trigger, blockers surfaced, gates fixed. Don't log every action.
+- **Log:** forks chosen, assumptions taken (`phase=assume`, with `evidence` naming what was searched), units completed with their verification result, pivots or reverts with their trigger, blockers surfaced, gates fixed. Don't log every action. The `assume` rows become the run's closing **Assumptions** list.
 - `evidence` is a pointer: a SHA, PR #, `file:line`, or artifact path. Never a paragraph.
 - `result` is an outcome: `tests green`, `reverted`, `INCONCLUSIVE`, `open`.
 - Write it in plain words: `threw out a helper's work because its screenshots were blank | checked the real files instead of its summary`.
