@@ -1,10 +1,10 @@
 # nstack
 
-Engineering skills for Claude Code and Codex. Small, evidence-first, and grown from real mistakes.
+Engineering skills for AI coding agents. Small, evidence-first, and grown from real mistakes.
 
 ## How it works
 
-nstack is one plugin that works in both Claude Code and Codex:
+All agents that support Agent Skills can load the skills on demand. The Claude Code and Codex plugin also wires them into the session:
 
 - **`core.md`** is injected at the start of every session: a situation → skill map plus defaults for start, build, prove, debug, autonomy, and reply.
 - **Skills** load on demand: from the map, from their `description`, or by name (`/nstack:review`).
@@ -38,6 +38,32 @@ nstack is one plugin that works in both Claude Code and Codex:
 | `supabase` | Migrations, RLS and grants, auth, environments |
 
 ## Install
+
+### Hermes Agent, Pi, and other agents
+
+With Node.js installed, run this and select your agents and skills:
+
+```sh
+npx skills add nelsongallardo/nstack --global
+```
+
+To install all nstack skills for Hermes Agent and Pi without prompts:
+
+```sh
+npx --yes skills add nelsongallardo/nstack --global --agent hermes-agent pi --skill '*' --yes
+```
+
+This installs the skills and their supporting files. It does not load `core.md` at session start or run the file-type hooks. Use the plugin below if you want those features in Claude Code or Codex; don't install both versions in the same agent.
+
+For Hermes messaging, run the install on the machine that runs the gateway. To target a named Hermes profile instead of the default, run:
+
+```sh
+HERMES_HOME="$HOME/.hermes/profiles/<profile>" npx --yes skills add nelsongallardo/nstack --global --agent hermes-agent --skill '*' --yes
+```
+
+Replace `<profile>` with the profile your bot uses. Check with `hermes skills list --enabled-only` (or `hermes -p <profile> skills list --enabled-only` for a named profile), then start a new chat.
+
+### Claude Code and Codex plugin
 
 **Claude Code**, once:
 
