@@ -79,13 +79,14 @@ PASS → land
 - Green CI feeds into a verdict but isn't one. The verdict comes from a reviewer that didn't write the code, and it covers one head SHA.
 - Spend verification in proportion to the change. A rebase, a conflict resolution, or a minor fix gets a single re-check at the new head. A wording-only change gets none. A full review repeats only for new behavior or a large new diff.
 - Opening a PR doesn't start a watch. Post the URL and keep building.
+- **Variant: the owner keeps the PR until it's live.** For queues and long-running programs, the owner doesn't stop at "PR open". It loops through review, the user's merge, and the rollout, reporting each phase change, and the coordinator cleans up only after a verified deploy. Read `references/pr-lifecycle.md` before briefing an owner this way.
 
 ## 6. Running agents
 
 - **Own every delegate's work.** Read the diff and write your own summary. Don't pass through what the delegate said.
 - **Use fresh agents with consolidated scope:** the original brief, every later directive, and the prior agent's report and branch. Resumed or interrupted agents silently drop directives. Reuse an agent only when the work needs state that lives in it (uncommitted changes, a running dev server).
 - **A role outlives its agent.** When a pane's context is spent, start a fresh session in that pane with a consolidated brief.
-- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity.
+- **Background by default.** Never message an agent just to check on it. Judge it by its side effects: commits, pushes, report files, PR activity. Watch the report directory for changes (in Claude Code, a `Monitor` that prints one line per changed file; in Codex, read it each turn) so a report wakes you instead of a poll.
 - **Keep agents rolling.** Start the next unit as each one finishes, not in batches. Three to five concurrent sessions is the practical ceiling.
 - **Retry by cause.** After a context limit, retry with a smaller scope. After a dropped connection, reuse the same brief. After a tool error, switch models (Claude ↔ Codex). After two retries, drop the unit and replan around it.
 - **Second opinions.** Seek another model's assessment when uncertainty remains or the consequence of a plausible failure warrants it. Give it the same evidence and question. Agreement helps identify hypotheses to check; it does not replace verification.
