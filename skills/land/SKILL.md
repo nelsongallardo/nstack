@@ -15,6 +15,7 @@ Green is not the same as safe, and a merge command is not the same as merged. Re
 | `drive` | "get it green", "merge-ready" | Loop until merge-ready, then stop. Never merge |
 | `threads` | "address the comments" | Use `address-review`, and touch nothing else |
 | `ship` | "merge it", "land the stack", "get this to production" | Merge, then verify the release |
+| `follow` | the user merged; "tell me when it's live" | Sections 6–7 only: watch the release to a verified, healthy deploy |
 
 Only an explicit merge, land, or ship request authorizes merging. Owner approval is something you wait for, not a blocker to fix.
 
