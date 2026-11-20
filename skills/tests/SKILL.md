@@ -7,18 +7,24 @@ description: "The user's own rules for tests: whether a test is worth writing, b
 
 Prefer no new test over a bad test. Proof that the change works is mandatory. A new test is one way to provide it, not the only one.
 
+**The default for a small or narrow change is no new test.** Agents over-produce tests: several per tiny change, each restating the code. Every new test must answer "if this fails, what real regression did it catch?" with a likely one. If the answer is "someone edits this exact line", skip it.
+
 ## 1. Should there be a test?
 
 **Write one when:**
 
 - There's a real behavior gap the existing tests don't cover.
-- A bug fix has a cheap local test target. The test must fail on the old code.
+- A bug fix in production logic that could plausibly come back (shared logic, subtle condition, several callers). The test must fail on the old code. A cheap test target alone is not a reason.
 - The user asked for TDD or a regression test.
 - The logic is isolated and has clear failure modes. List the failure modes, then test them.
 
+**When a test is warranted, write the fewest that cover distinct failure modes.** Usually one. A second test needs a failure mode the first can't catch.
+
 **Skip it for:**
 
-- Docs, config, copy, and pure wiring changes.
+- Docs, config, copy, thresholds, and pure wiring changes.
+- Test-only code: fixtures, fakes, seed data, dev tooling, test helpers.
+- A small, local change whose effect a run or an existing test already shows. Prove it with that run and say so.
 - Cases where the test path is unclear, expensive, or integration-heavy and nobody asked for it. Prove the change with a real command, script, browser run, or log assertion instead, and say so.
 - A test that would mostly test mocks, encode current internals, depend on timing or global state, or be deleted right after proving the fix.
 
