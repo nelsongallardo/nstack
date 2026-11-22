@@ -1,6 +1,6 @@
 # nstack repo
 
-This repo is a skills pack for Claude Code and Codex. Read CONTRIBUTING.md before changing it.
+This repo is a skills pack for Claude Code, Codex, and Hermes Agent. Read CONTRIBUTING.md before changing it.
 
 ## Adding or renaming a skill (all steps, every time)
 
@@ -12,6 +12,6 @@ A skill that isn't wired in never gets invoked. Agents load skills reliably only
 4. `evals/<case>/` has a realistic prompt (one that doesn't name the skill) and a `tool_used: Skill` grader for it.
 5. `python3 scripts/check.py` passes. The pre-commit hook runs it (enable it once per clone: `git config core.hooksPath .githooks`).
 6. Run the eval for the new case (`evals/README.md`) and confirm the skill fires.
-7. Bump `version` in `.claude-plugin/plugin.json` and `marketplace.json`. Installed copies update through the plugin (see README).
+7. Bump `version` in `.claude-plugin/plugin.json`, `marketplace.json`, and `plugin.yaml`. `scripts/check.py` fails if they differ. Installed copies update through the plugin (see README).
 
 Keep everything project-agnostic: no project, company, person, or PR names.

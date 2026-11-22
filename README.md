@@ -4,11 +4,11 @@ Engineering skills for AI coding agents. Small, evidence-first, and grown from r
 
 ## How it works
 
-All agents that support Agent Skills can load the skills on demand. The Claude Code and Codex plugin also wires them into the session:
+Agents that support Agent Skills can load the skills on demand. The plugins also wire them into the session:
 
-- **`core.md`** is injected at the start of every session: a situation → skill map plus defaults for start, build, prove, debug, autonomy, and reply.
-- **Skills** load on demand: from the map, from their `description`, or by name (`/nstack:review`).
-- **File-type rules** in `rules/` fire once per session when the agent reads or edits a matching file (`.ts`, `.py`, SQL and migrations, tests) and tell it to load the matching skill.
+- **`core.md`** is loaded in new Claude Code, Codex, and Hermes sessions: a situation → skill map plus defaults for engineering work.
+- **Skills** load on demand. With a plugin, they use the `nstack:<name>` namespace.
+- **File-type rules** in `rules/` remind Claude Code and Codex to load the matching skill when they touch TypeScript, Python, SQL, or tests. The Hermes plugin does not load `rules/`.
 
 ## Skills
 
@@ -39,7 +39,23 @@ All agents that support Agent Skills can load the skills on demand. The Claude C
 
 ## Install
 
-### Hermes Agent, Pi, and other agents
+### Hermes Agent
+
+On the machine that runs Hermes 0.23.2 or newer (the gateway host if you use Telegram or other messaging), run:
+
+```sh
+hermes plugins install nelsongallardo/nstack --enable
+```
+
+If Hermes pauses for a security review, read the findings before approving the install.
+
+For a named profile, use `hermes -p <profile> plugins install nelsongallardo/nstack --enable`.
+
+Start a new chat to apply `core.md`. The plugin registers the skills as `nstack:<name>`, without editing `AGENTS.md` or requiring Node.js.
+
+To update, run `hermes plugins update nstack`. To disable, run `hermes plugins disable nstack`. Pass the same `-p <profile>` to either, then start a new chat.
+
+### Pi and other agents (skills only)
 
 With Node.js installed, run this and select your agents and skills:
 
@@ -47,21 +63,7 @@ With Node.js installed, run this and select your agents and skills:
 npx skills add nelsongallardo/nstack --global
 ```
 
-To install all nstack skills for Hermes Agent and Pi without prompts:
-
-```sh
-npx --yes skills add nelsongallardo/nstack --global --agent hermes-agent pi --skill '*' --yes
-```
-
-This installs the skills and their supporting files. It does not load `core.md` at session start or run the file-type hooks. Use the plugin below if you want those features in Claude Code or Codex; don't install both versions in the same agent.
-
-For Hermes messaging, run the install on the machine that runs the gateway. To target a named Hermes profile instead of the default, run:
-
-```sh
-HERMES_HOME="$HOME/.hermes/profiles/<profile>" npx --yes skills add nelsongallardo/nstack --global --agent hermes-agent --skill '*' --yes
-```
-
-Replace `<profile>` with the profile your bot uses. Check with `hermes skills list --enabled-only` (or `hermes -p <profile> skills list --enabled-only` for a named profile), then start a new chat.
+This installs the skill files without loading `core.md` or running hooks. If you use the Hermes, Claude Code, or Codex plugin, you don't need the skills-only install for that agent.
 
 ### Claude Code and Codex plugin
 
