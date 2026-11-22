@@ -26,4 +26,4 @@ skills/<name>/
 
 Adding a skill has a fixed checklist in [AGENTS.md](AGENTS.md): core map row, directive description, eval case, path rule for file-type skills. `scripts/check.py` enforces it and runs as a pre-commit hook.
 
-Bump `version` in `.claude-plugin/plugin.json` and `marketplace.json` when a change should reach installed copies.
+Bump `version` in `.claude-plugin/plugin.json`, `marketplace.json`, and `plugin.yaml` when a change should reach installed copies.

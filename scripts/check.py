@@ -4,8 +4,12 @@
 A skill that exists but isn't wired in is invisible in practice: agents pick
 skills reliably only when the always-on core.md names them, the description
 says it holds the user's own rules, and an eval proves it fires.
+Also checks that each core.md section fits Hermes's prompt-section cap and
+that the plugin version matches across all three manifests.
 Run: python3 scripts/check.py   (also runs from .githooks/pre-commit)
 """
+import importlib.util
+import json
 import pathlib
 import re
 import sys
@@ -83,6 +87,27 @@ for rule in sorted((ROOT / "rules").glob("*.md")):
     for ref in re.findall(r"nstack:([a-z0-9-]+)", text):
         if ref not in skills:
             fail(f"rules/{rule.name}: references missing skill nstack:{ref}")
+
+sys.dont_write_bytecode = True
+spec = importlib.util.spec_from_file_location("nstack_hermes_plugin", ROOT / "__init__.py")
+hermes_plugin = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(hermes_plugin)
+try:
+    sections = hermes_plugin.core_sections(core)
+except ValueError:
+    fail("core.md must keep its '## Start' and '## Autonomy' headings; the Hermes plugin splits on them")
+    sections = []
+for section_id, content in sections:
+    if len(content) > hermes_plugin.MAX_SECTION_CHARS:
+        fail(f"core.md section {section_id} has {len(content)} chars; Hermes rejects more than {hermes_plugin.MAX_SECTION_CHARS}")
+
+versions = {
+    ".claude-plugin/plugin.json": json.loads((ROOT / ".claude-plugin/plugin.json").read_text())["version"],
+    ".claude-plugin/marketplace.json": json.loads((ROOT / ".claude-plugin/marketplace.json").read_text())["metadata"]["version"],
+    "plugin.yaml": re.search(r"^version:\s*(\S+)", (ROOT / "plugin.yaml").read_text(), re.M).group(1),
+}
+if len(set(versions.values())) != 1:
+    fail("plugin versions differ: " + ", ".join(f"{path} {version}" for path, version in versions.items()))
 
 if errors:
     print("nstack check failed:")
