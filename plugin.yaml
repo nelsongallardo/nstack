@@ -1,4 +1,4 @@
 name: nstack
-version: 0.5.2
+version: 0.5.3
 description: Engineering skills and shared workflow rules for Hermes Agent.
 requires_hermes: ">=0.23.2"
