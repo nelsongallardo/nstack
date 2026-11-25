@@ -20,7 +20,8 @@ Agents that support Agent Skills can load the skills on demand. The plugins also
 | `land` | PR status, CI triage, merge, and confirming deploy and migrations shipped |
 | `coordinate` | Parallel sessions: briefs, worktrees, the review loop, retries, pickup, pause |
 | `issues` | Checklist audit, what's unblocked, parallel lanes, bug triage |
-| `debug` | Root cause from runtime evidence |
+| `debug` | Reproduce, narrow and fix a code bug from runtime evidence |
+| `troubleshoot` | Running-system problems: intake from a link, cited root-cause chain, park/resume note |
 | `perf` | Measured performance work. Vet every number |
 | `design` | Usage-first sketches, design it twice, red flags, prototype instead of debating |
 | `refactor` | Pin behavior, subtract, reshape, migrate callers, delete |
@@ -30,6 +31,7 @@ Agents that support Agent Skills can load the skills on demand. The plugins also
 | `decision-log` | Per-run decision trail, plus durable decisions, assumptions, and open questions |
 | `catch-me-up` | What changed and what's waiting on me. Recall across sessions |
 | `verify-ui` | Drive the real app with playwright-cli. Generate a per-repo `verify-<app>` skill |
+| `incident-triage` | On-call verdict for a page, shift brief/summary/handoff, drills, alert patterns |
 | `learn` | Turn a repeated mistake into structure (a type, lint, or test), and prose last |
 | `writing` | Docs, PRs, commits, and agent-facing prose |
 | `types-and-boundaries` | Parse at boundaries, model the domain, idempotency, concurrency |
