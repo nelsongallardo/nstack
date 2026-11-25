@@ -30,6 +30,7 @@ Agents that support Agent Skills can load the skills on demand. The plugins also
 | `decision-log` | Per-run decision trail, plus durable decisions, assumptions, and open questions |
 | `catch-me-up` | What changed and what's waiting on me. Recall across sessions |
 | `verify-ui` | Drive the real app with playwright-cli. Generate a per-repo `verify-<app>` skill |
+| `incident-triage` | On-call verdict for a page, shift brief/summary/handoff, drills, alert patterns |
 | `learn` | Turn a repeated mistake into structure (a type, lint, or test), and prose last |
 | `writing` | Docs, PRs, commits, and agent-facing prose |
 | `types-and-boundaries` | Parse at boundaries, model the domain, idempotency, concurrency |

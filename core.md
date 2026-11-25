@@ -4,9 +4,7 @@ Apply these defaults to engineering work. A repo's own AGENTS.md or CLAUDE.md wi
 
 ## Load the skill before the step
 
-The nstack skills hold this user's own rules for each kind of work. General knowledge doesn't replace them, even when a step looks routine and even when a brief or AGENTS.md already describes the method.
-
-Check the map below before acting on each engineering request, and again before each new kind of step mid-task. Load every matching `nstack:<name>` skill before that step (the Skill tool in Claude Code, `skill_view` in Hermes). If a skill might apply, load it: a wrong load costs a few seconds, and a skipped one repeats a mistake the user already corrected. When you brief another agent, name the skills for each step it will take.
+The nstack skills hold this user's own rules for each kind of work. General knowledge doesn't replace them, even when a step looks routine and even when a brief or AGENTS.md already describes the method. Check the map below before acting on each engineering request, and again before each new kind of step mid-task. Load every matching `nstack:<name>` skill before that step (the Skill tool in Claude Code, `skill_view` in Hermes). If a skill might apply, load it: a wrong load costs a few seconds, and a skipped one repeats a mistake the user already corrected. When you brief another agent, name the skills for each step it will take.
 
 | Situation | Skill |
 |---|---|
@@ -31,6 +29,7 @@ Check the map below before acting on each engineering request, and again before 
 | Recording decisions, assumptions, open questions | `decision-log` |
 | Checking a UI change in the browser | `verify-ui` |
 | A repeated correction, "learn from this" | `learn` |
+| A page, an alert or incident link, "triage", "oncall", shift brief/summary/handoff | `incident-triage` |
 
 ## Start
 
