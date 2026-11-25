@@ -89,16 +89,9 @@ creating it on first triage. If not, keep the timeline in the conversation and o
 ## 2. Root cause
 
 After the verdict the question often becomes *why*: the user pastes logs or a trace, asks why, says
-"dig", or the alert resolved but errors continue. Switch to root-cause work without asking. If a
-dedicated troubleshooting/debugging skill is available (or named in the config), use it and pass along
-what you've gathered. Otherwise:
-
-- Measure the symptom exactly: count, time window, first seen, affected slice (endpoint, region,
-  client, tenant).
-- Trace from the trigger to the failure through code, citing `file:line` for what you actually opened.
-- Form competing hypotheses and look for evidence that would distinguish them, not just confirm one.
-- Report the cause, the evidence chain and the confidence. Propose a fix only if asked; the responder's
-  job tonight is mitigation, and the owning team decides the fix.
+"dig", or the alert resolved but errors continue. Switch without asking: load `troubleshoot` and follow its
+Root cause section, passing along what you've gathered so nothing is fetched twice. The safety rules below
+still apply.
 
 ## 3. Other modes
 

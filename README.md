@@ -20,7 +20,8 @@ Agents that support Agent Skills can load the skills on demand. The plugins also
 | `land` | PR status, CI triage, merge, and confirming deploy and migrations shipped |
 | `coordinate` | Parallel sessions: briefs, worktrees, the review loop, retries, pickup, pause |
 | `issues` | Checklist audit, what's unblocked, parallel lanes, bug triage |
-| `debug` | Root cause from runtime evidence |
+| `debug` | Reproduce, narrow and fix a code bug from runtime evidence |
+| `troubleshoot` | Running-system problems: intake from a link, cited root-cause chain, park/resume note |
 | `perf` | Measured performance work. Vet every number |
 | `design` | Usage-first sketches, design it twice, red flags, prototype instead of debating |
 | `refactor` | Pin behavior, subtract, reshape, migrate callers, delete |

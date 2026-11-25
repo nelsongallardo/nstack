@@ -12,7 +12,8 @@ The nstack skills hold this user's own rules for each kind of work. General know
 | Writing or editing `.py` | `python` |
 | A migration, SQL, RLS policy, grant, or Supabase auth | `supabase` |
 | Writing, changing, or deciding on tests | `tests` |
-| A bug, error, failing test, "still broken" | `debug` |
+| A bug to reproduce and fix in code, failing test, "still broken" | `debug` |
+| Something wrong in a running system: alert, deploy, CI run, data pipeline, "root cause" | `troubleshoot` |
 | Slowness, or any perf number | `perf` |
 | A new module or API, or a change with several possible shapes | `design` |
 | A restructure that keeps behavior | `refactor` |
@@ -25,7 +26,7 @@ The nstack skills hold this user's own rules for each kind of work. General know
 | Several agents or sessions, "start/open sessions", delegating, handing work off | `coordinate` |
 | Issue checklists, "what can we unblock" | `issues` |
 | "What's left", "what needs me", "catch me up", "where are we" | `catch-me-up` |
-| How or why questions about code | `investigate` |
+| How or why questions about code and its history | `investigate` |
 | Recording decisions, assumptions, open questions | `decision-log` |
 | Checking a UI change in the browser | `verify-ui` |
 | A repeated correction, "learn from this" | `learn` |

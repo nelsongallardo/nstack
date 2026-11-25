@@ -1,6 +1,6 @@
 ---
 name: investigate
-description: "The user's own procedure for how/why questions: code anchors, evidence categories, labeled claims, no code changes. Load for 'how does X work', 'why is it built this way', 'why this number', 'when did this break', 'are we sure', or before changing unfamiliar code."
+description: "The user's own procedure for how/why questions: code anchors, evidence categories, labeled claims, no code changes. Load for how/why questions about code and its history: 'how does X work', 'why is it built this way', 'why this number', 'when did this change', 'are we sure', or before changing unfamiliar code. For 'why is production doing X', use troubleshoot."
 ---
 
 # Investigate

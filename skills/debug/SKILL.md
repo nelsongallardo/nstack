@@ -1,6 +1,6 @@
 ---
 name: debug
-description: "The user's own debugging procedure: recorded state first, reproduce on the user's surface, runtime evidence, fix at the root, what to do after two failed fixes. Load for any bug, error, failing test, leak, flaky behavior, 'still broken', 'why is X happening', or a stack trace."
+description: "The user's own debugging procedure: recorded state first, reproduce on the user's surface, runtime evidence, fix at the root, what to do after two failed fixes. Load for a bug to reproduce and fix in code: a wrong result, error, failing test, leak, flaky behavior, 'still broken', or a stack trace from code you're changing. For a problem in a running system (alert, deploy, CI run, data pipeline), start with troubleshoot."
 ---
 
 # Debug
